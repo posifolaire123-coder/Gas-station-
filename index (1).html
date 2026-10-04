@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pleak Korner — Gas, Tacos &amp; Everything In Between</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#201A16;
+    --charcoal-2:#2A231D;
+    --cream:#F1E6D2;
+    --cream-2:#E9DABF;
+    --brick:#B23A1E;
+    --mustard:#E8A93B;
+    --avocado:#5C6B35;
+    --coffee:#3B2A20;
+    --teal:#1B6E82;
+    --teal-dark:#134f5f;
+    --paper-shadow: rgba(0,0,0,.18);
+    --header-h:78px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Karla', sans-serif;
+    color:var(--coffee);
+    background:var(--cream);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Alfa Slab One', serif;
+    line-height:1.08;
+    margin:0;
+    font-weight:400;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  a:focus-visible{
+    outline:3px solid var(--mustard);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  #services, #menu, #reviews, #visit{
+    scroll-margin-top:var(--header-h);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    background:var(--charcoal);
+    position:sticky;
+    top:0;
+    z-index:50;
+    border-bottom:3px solid var(--teal);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px 24px;
+    padding:18px 0;
+  }
+  .wordmark{
+    font-family:'Alfa Slab One', serif;
+    color:var(--cream);
+    font-size:1.4rem;
+    letter-spacing:0.5px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .wordmark span{color:var(--mustard);}
+  nav.links{ display:flex; gap:24px; flex-wrap:wrap; }
+  nav.links a{
+    color:var(--cream-2);
+    text-decoration:none;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:4px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .18s ease, color .18s ease;
+  }
+  nav.links a:hover{ border-color:var(--mustard); color:#fff; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    min-height:480px;
+    display:flex;
+    align-items:center;
+    background:
+      linear-gradient(100deg, rgba(32,26,22,.94) 20%, rgba(32,26,22,.72) 48%, rgba(19,79,95,.55) 100%),
+      url('images/storefront.png');
+    background-size:cover;
+    background-position:center 62%;
+  }
+  .hero .wrap{ position:relative; z-index:1; padding-top:64px; padding-bottom:64px; }
+  .hero-copy h1{
+    color:var(--cream);
+    font-size:clamp(2.3rem, 5.2vw, 3.6rem);
+    max-width:12ch;
+  }
+  .hero-copy .line{ display:block; overflow:hidden; }
+  .hero-copy .line span{
+    display:block;
+    transform:translateY(110%);
+    animation:riseUp .7s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .hero-copy .line:nth-child(1) span{animation-delay:.05s;}
+  .hero-copy .line:nth-child(2) span{animation-delay:.18s;}
+  .hero-copy .line:nth-child(3) span{animation-delay:.31s;}
+  @keyframes riseUp{ to{ transform:translateY(0); } }
+
+  .hero-copy p{
+    color:var(--cream-2);
+    font-size:1.08rem;
+    max-width:50ch;
+    margin:22px 0 0;
+    opacity:0;
+    animation:fadeIn .6s ease forwards;
+    animation-delay:.55s;
+  }
+  @keyframes fadeIn{ to{opacity:1;} }
+
+  /* ---------- SERVICES ---------- */
+  .services{ background:var(--cream); padding:88px 0 96px; }
+  .services-head{ max-width:56ch; margin-bottom:44px; }
+  .services-head h2{ font-size:2rem; color:var(--coffee); margin-bottom:14px; }
+  .services-head p{ font-size:1.04rem; margin:0; }
+
+  .service-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:26px; }
+  @media (max-width:880px){ .service-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .service-grid{grid-template-columns:1fr;} }
+
+  .service-card{
+    position:relative; min-height:210px; padding:22px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    color:var(--cream); background-color:var(--charcoal);
+    background-size:cover; background-position:center; isolation:isolate;
+  }
+  .service-card::before{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(32,26,22,.15) 0%, rgba(32,26,22,.88) 82%);
+    z-index:0;
+  }
+  .service-card > *{ position:relative; z-index:1; }
+  .service-card.plain{ background-color:var(--charcoal-2); justify-content:flex-start; }
+  .service-card.plain::before{ background:none; }
+  .service-card .icon{ width:38px; height:38px; margin-bottom:12px; color:var(--mustard); }
+  .service-card h3{ font-family:'Karla', sans-serif; font-weight:700; font-size:1.12rem; color:var(--cream); margin-bottom:6px; }
+  .service-card p{ font-size:0.92rem; color:var(--cream-2); margin:0; }
+  .service-card.fuel{ background-color:#DCEEF1; }
+  .service-card.fuel p{ color:#264a52; }
+  .service-card.fuel h3, .service-card.fuel .icon{ color:#123c46; }
+  .service-card.tacos{ background-color:#3a2416; }
+  .service-card.tacos .icon{ color:var(--brick); }
+  .service-card.money{ background-color:var(--charcoal-2); }
+  .service-card.money .icon{ color:var(--avocado); }
+  .service-card.lotto{ background-color:var(--charcoal-2); }
+  .service-card.lotto .icon{ color:var(--mustard); }
+
+  /* ---------- ABOUT ---------- */
+  .about{ background:var(--cream); padding:20px 0 92px; }
+  .about .wrap{
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:start;
+    border-top:3px dashed rgba(59,42,32,.18); padding-top:68px;
+  }
+  @media (max-width:800px){ .about .wrap{grid-template-columns:1fr; gap:32px;} }
+  .pull{ border-left:6px solid var(--brick); padding-left:22px; }
+  .pull p{ font-family:'Alfa Slab One', serif; color:var(--brick); font-size:1.5rem; line-height:1.28; margin:0 0 12px; }
+  .pull cite{ font-style:normal; font-family:'Karla',sans-serif; font-weight:700; font-size:0.92rem; color:var(--coffee); opacity:.72; }
+  .about-body h2{ font-size:1.9rem; color:var(--coffee); margin-bottom:18px; }
+  .about-body p{ max-width:62ch; font-size:1.04rem; margin:0 0 16px; }
+
+  /* ---------- MENU ---------- */
+  .menu-section{
+    background:var(--charcoal);
+    background-image:repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    padding:88px 0 96px;
+    color:var(--cream);
+  }
+  .menu-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:12px; margin-bottom:40px;
+    border-bottom:3px dashed rgba(233,218,191,.28); padding-bottom:22px;
+  }
+  .menu-head h2{ color:var(--mustard); font-size:2rem; }
+  .menu-head p{ color:var(--cream-2); margin:0; max-width:34ch; font-size:0.98rem; }
+
+  .menu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:34px 56px; }
+  @media (max-width:720px){ .menu-grid{grid-template-columns:1fr;} }
+  .menu-item{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    padding:16px 0; border-bottom:1px solid rgba(233,218,191,.18);
+  }
+  .menu-item .name{ font-weight:700; font-size:1.08rem; color:var(--cream); }
+  .menu-item .desc{ display:block; font-weight:400; color:var(--cream-2); font-size:0.9rem; margin-top:3px; }
+  .menu-item .price{ font-family:'Alfa Slab One', serif; color:var(--mustard); font-size:1.05rem; white-space:nowrap; }
+
+  .menu-sub{ margin-top:36px; padding-top:28px; border-top:1px dashed rgba(233,218,191,.22); }
+  .menu-sub h3{ font-family:'Karla',sans-serif; font-weight:700; font-size:1.1rem; color:var(--cream); margin-bottom:6px; }
+  .menu-sub > p.lead{ color:var(--cream-2); font-size:0.92rem; max-width:52ch; margin:0 0 14px; }
+  .menu-sub.special .badge{
+    display:inline-block; background:var(--brick); color:var(--cream);
+    font-size:0.75rem; font-weight:700; padding:4px 10px; margin-bottom:10px;
+  }
+
+  .menu-note{ margin-top:32px; color:var(--cream-2); font-size:0.9rem; font-style:italic; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .reviews{ background:var(--cream); padding:96px 0 104px; }
+  .reviews h2{ font-size:1.9rem; margin-bottom:48px; color:var(--coffee); }
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+  @media (max-width:840px){ .review-grid{grid-template-columns:1fr; max-width:420px; margin:0 auto;} }
+  .card{ background:#FBF6EC; padding:28px 24px 24px; box-shadow:3px 4px 0 var(--paper-shadow); position:relative; }
+  .card:nth-child(1){ transform:rotate(-2.2deg); }
+  .card:nth-child(2){ transform:rotate(1.6deg); }
+  .card:nth-child(3){ transform:rotate(-1.1deg); }
+  .card .tape{ position:absolute; top:-12px; left:50%; transform:translateX(-50%) rotate(-3deg); width:70px; height:22px; background:rgba(92,107,53,0.55); }
+  .card p{ font-size:1.05rem; margin:0 0 14px; color:var(--coffee); }
+  .card .who{ font-size:0.85rem; font-weight:700; color:var(--brick); }
+
+  /* ---------- VISIT ---------- */
+  .visit{ background:var(--teal-dark); color:var(--cream); padding:88px 0; }
+  .visit .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  @media (max-width:800px){ .visit .wrap{grid-template-columns:1fr;} }
+  .visit h2{ font-size:1.9rem; color:var(--cream); margin-bottom:22px; }
+  .hours-table{ width:100%; border-collapse:collapse; }
+  .hours-table tr{ border-bottom:1px solid rgba(241,230,212,.25); }
+  .hours-table td{ padding:11px 0; font-size:1rem; }
+  .hours-table td:last-child{ text-align:right; font-weight:700; }
+  .visit-details p{ margin:0 0 10px; font-size:1.05rem; }
+  .visit-details .label{ display:block; font-size:0.82rem; color:rgba(241,230,212,.7); margin-bottom:2px; }
+  .visit-details .block{ margin-bottom:22px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--charcoal); color:var(--cream-2); padding:36px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  footer .foot-wordmark{ font-family:'Alfa Slab One', serif; color:var(--cream); font-size:1.05rem; }
+  footer nav{ display:flex; gap:20px; flex-wrap:wrap; }
+  footer nav a{ color:var(--cream-2); text-decoration:none; font-size:0.9rem; }
+  footer nav a:hover{ color:var(--mustard); }
+  footer .fine{ width:100%; font-size:0.8rem; color:rgba(233,218,191,.5); margin-top:18px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="wordmark">Pleak <span>Korner</span></a>
+    <nav class="links">
+      <a href="#services">What's here</a>
+      <a href="#menu">Tacos</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#visit">Hours &amp; location</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>
+        <span class="line"><span>Fill up.</span></span>
+        <span class="line"><span>Cool off.</span></span>
+        <span class="line"><span>Eat well.</span></span>
+      </h1>
+      <p>Pleak Korner is the gas station where people still stop for the tacos. Fuel, ice-cold drinks, fresh produce, and money services out front — a taco window slinging plates from the same spot for years out back.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head">
+      <h2>One stop, more than gas</h2>
+      <p>Pull in for fuel and end up leaving with a lot more than a full tank.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card fuel plain">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M3 10h10"/><path d="M15 6h2l3 3v9a1.5 1.5 0 0 1-3 0v-2a1.5 1.5 0 0 0-1.5-1.5H15"/><circle cx="17" cy="14" r=".5" fill="currentColor"/></svg>
+        <h3>Fuel</h3>
+        <p>Unleaded and diesel, with a price board that gets updated the second it changes.</p>
+      </div>
+
+      <div class="service-card tacos">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c0-2 4-8 10-8s10 6 10 8"/><path d="M2 12c3 1 17 1 20 0"/><path d="M12 12v6"/></svg>
+        <h3>Tacos</h3>
+        <p>Same trompo, same hand-pressed tortillas, same guy at the window.</p>
+      </div>
+
+      <div class="service-card" style="background-image:url('images/drinks-cooler.png');">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 20H9L8 2Z"/><path d="M7.5 8h9"/></svg>
+        <h3>Ice-cold drinks</h3>
+        <p>Energy drinks, soda, and water — stocked and cold, always.</p>
+      </div>
+
+      <div class="service-card" style="background-image:url('images/produce.png');">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 5c1-2 3-3 5-3"/></svg>
+        <h3>Fresh produce</h3>
+        <p>Watermelon, cantaloupe, and tomatoes, cut fresh right on site.</p>
+      </div>
+
+      <div class="service-card money plain">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
+        <h3>Money services</h3>
+        <p>Western Union, Lone Star card, bill pay, money orders, and check cashing.</p>
+      </div>
+
+      <div class="service-card lotto plain">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M7 15h.01M12 15h.01M17 15h.01"/></svg>
+        <h3>Lottery &amp; ATM</h3>
+        <p>Scratch-offs and lotto at the counter, cash machine right by the door.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="wrap">
+    <div class="pull">
+      <p>"The guy that owns this place is pretty cool."</p>
+      <cite>— someone who's been coming for years</cite>
+    </div>
+    <div class="about-body">
+      <h2>Gas station first, but people stay for the tacos</h2>
+      <p>Pleak Korner started as a fuel stop with an ice cooler out front, and somewhere along the way the taco window became the real reason people pull in. It's still the same trompo, the same hand-pressed tortillas, the same guy behind the counter who has your order figured out before you say it.</p>
+      <p>The inside won't win any awards — it smells like a working store because it is one — but that's never been the point. The point is you can fill your tank, grab a cold drink, cash a money order, and eat better than you expected to, all without leaving the lot.</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <h2>What's cooking out back</h2>
+      <p>Tacos served two to an order unless you say otherwise. Corn or flour tortilla, your choice.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="name">Al pastor<span class="desc">Pineapple, onion, cilantro</span></span>
+        <span class="price">$3.25</span>
+      </div>
+      <div class="menu-item">
+        <span class="name">Carne asada<span class="desc">Grilled steak, salsa verde</span></span>
+        <span class="price">$3.50</span>
+      </div>
+      <div class="menu-item">
+        <span class="name">Carnitas<span class="desc">Slow-braised pork</span></span>
+        <span class="price">$3.25</span>
+      </div>
+      <div class="menu-item">
+        <span class="name">Lengua<span class="desc">For the regulars</span></span>
+        <span class="price">$3.75</span>
+      </div>
+      <div class="menu-item">
+        <span class="name">Quesadilla<span class="desc">Griddled, pick your meat</span></span>
+        <span class="price">$6.00</span>
+      </div>
+      <div class="menu-item">
+        <span class="name">Horchata / Jamaica<span class="desc">Made fresh, served cold</span></span>
+        <span class="price">$2.50</span>
+      </div>
+    </div>
+
+    <div class="menu-sub">
+      <h3>Not in the mood for a tortilla?</h3>
+      <p class="lead">The same seasoned meats above, served as a torta — a Mexican sandwich on fresh bread — if you want a change of pace.</p>
+      <div class="menu-item">
+        <span class="name">Torta<span class="desc">Any meat, served as a sandwich</span></span>
+        <span class="price">$6.50</span>
+      </div>
+    </div>
+
+    <div class="menu-sub special">
+      <span class="badge">Weekends only</span>
+      <h3>Tamales</h3>
+      <p class="lead">Early Saturday and Sunday mornings, while they last — these sell out fast.</p>
+      <div class="menu-item">
+        <span class="name">Tamales<span class="desc">Weekend mornings, first come first served</span></span>
+        <span class="price">$2.00 ea</span>
+      </div>
+    </div>
+
+    <p class="menu-note">Cash runs faster than card. Ask about the daily special — there's usually one.</p>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <h2>What the corner says</h2>
+    <div class="review-grid">
+      <div class="card">
+        <div class="tape"></div>
+        <p>"Good service at the taco stand there and the best street tacos."</p>
+        <div class="who">Google review</div>
+      </div>
+      <div class="card">
+        <div class="tape"></div>
+        <p>"Interior isn't that bad, smells of food always."</p>
+        <div class="who">Google review</div>
+      </div>
+      <div class="card">
+        <div class="tape"></div>
+        <p>"I've been going here for years. The guy that owns this place is pretty cool."</p>
+        <div class="who">Google review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div>
+      <h2>Hours</h2>
+      <table class="hours-table">
+        <tr><td>Store &amp; fuel</td><td>Open daily, early to late</td></tr>
+        <tr><td>Taco window</td><td>11am – 9pm</td></tr>
+        <tr><td>Tamales</td><td>Sat &amp; Sun mornings, while they last</td></tr>
+        <tr><td>Taco window, Mon</td><td>Closed</td></tr>
+      </table>
+    </div>
+    <div class="visit-details">
+      <h2>Find us</h2>
+      <div class="block">
+        <span class="label">Location</span>
+        <p>Corner of 4th &amp; Bragg — look for the pumps and the blue awning</p>
+      </div>
+      <div class="block">
+        <span class="label">Fuel</span>
+        <p>Unleaded and diesel, priced daily on the board out front</p>
+      </div>
+      <div class="block">
+        <span class="label">Also here</span>
+        <p>ATM · Western Union · Lone Star · bill pay · money orders · lottery</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-wordmark">Pleak Korner</div>
+    <nav>
+      <a href="#services">What's here</a>
+      <a href="#menu">Tacos</a>
+      <a href="#visit">Hours &amp; location</a>
+    </nav>
+    <div class="fine">Gas, tacos, and everything in between. Hours, address, and fuel details above are placeholders — swap in the real ones.</div>
+  </div>
+</footer>
+
+</body>
+</html>
